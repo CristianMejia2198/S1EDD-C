@@ -1,0 +1,10 @@
+digraph cola{
+rankdir=LR;
+node[shape = record];
+nodonull2[label="null"];
+nodo0[label="{19:16:39|}"];
+nodo1[label="{19:16:43|}"];
+nodo0->nodo1;
+nodo1->nodonull2;
+} [dir=back];
+}
