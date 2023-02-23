@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Clase1/Estructura"
+	"S1EDD-C/Clase1/Estructura"
 	"fmt"
 )
 

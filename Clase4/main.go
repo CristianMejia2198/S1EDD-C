@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Clase4/estructuras"
+	"S1EDD-C/Clase4/estructuras"
 	"fmt"
 	"strconv"
 	"time"
@@ -9,8 +9,10 @@ import (
 
 func main() {
 	fmt.Println("Clase 4")
-	pila := &estructuras.Pila{nil, 0}
-	cola := &estructuras.Cola{nil, 0}
+	//var pila *estructuras.Pila
+	pila := &estructuras.Pila{Primero: nil, Longitud: 0}
+	//var cola *estructuras.Cola
+	cola := &estructuras.Cola{Primero: nil, Longitud: 0}
 	opcion := 0
 	salir := false
 
