@@ -2,7 +2,7 @@
 
 ## __Ejemplo de Matriz Dispersa en JS__  
 
-Para el ejemplo de la clase 6 se realizo una matriz dispersa, a continua se explicara cada parte del ejemplo, para corroborar de forma grafica de la matriz se usara la siguiente pagina [Graphviz Online](https://dreampuf.github.io/GraphvizOnline/), solo copiaremos el codigo que nos devolvera la pagina sencilla en html llamada __clase6.html__   
+Para el ejemplo de la clase 6 se realizo una matriz dispersa, a continua se explicara cada parte del ejemplo, para corroborar de forma grafica la matriz final se usara la siguiente pagina [Graphviz Online](https://dreampuf.github.io/GraphvizOnline/), solo copiaremos el codigo que nos devolvera la pagina sencilla en html llamada __clase6.html__   
 <img src="img/pagina.png" width="600" height="512">
 
 ## __Clase nodoMatriz__
@@ -11,7 +11,7 @@ Esta sera nuestra clase con la cual llevaremos el control de los nodos que posea
 <summary> Descripcion 🧐</summary>
 <br>
 
-Este contara con los atributos __siguiente y anterior__ que seran los punteros para podernos mover a lo largo del eje X, los atributos __abajo y arriba__ que seran los punteros para podernos mover a lo largo del eje Y de la matriz, los atributos __posX y posY__ con ellos podemos llevar control en que posicion de la matriz nos encontramos, seran nuestra forma de llevar control las posicion de los nodos de la matriz, por ultimo el atributo __posicion__ el cual solo almacenara una cadena de texto, en este caso para mostrarnos la posicion que se encuentra el nodo.
+Este contara con los atributos __siguiente y anterior__ que seran los punteros para podernos mover a lo largo del eje X, los atributos __abajo y arriba__ que seran los punteros para podernos mover a lo largo del eje Y de la matriz, los atributos __posX y posY__ con ellos podemos llevar control en que posicion de la matriz nos encontramos, seran nuestra forma de llevar el control de las posiciones de los nodos de la matriz, por ultimo el atributo __posicion__ el cual solo almacenara una cadena de texto, en este caso para mostrarnos la posicion que se encuentra el nodo.
 
 ``` javascript
     class nodoMatriz{
@@ -40,7 +40,7 @@ Esta sera nuestra clase principal con la cual llevaremos control de todas las fu
     }
 ```
 
-### __Funcinoes que se van a crear dentro de la clase Matriz__
+### __Funciones que se van a crear dentro de la clase Matriz__
 
 ---
 
