@@ -31,7 +31,7 @@ class Arbol {
         this.raiz = this.insertarNodo(nuevoNodo, this.raiz);
     }
 
-    recorridoInorden(raiz){
+    recorridoPreorden(raiz){
         var cadena = ""
         if(raiz !== null){
             cadena = cadena + "\""
@@ -39,21 +39,21 @@ class Arbol {
             cadena = cadena + "\""
             if(raiz.izquierdo !== null){
                 cadena = cadena + " -> "
-                cadena = cadena + this.recorridoInorden(raiz.izquierdo)
+                cadena = cadena + this.recorridoPreorden(raiz.izquierdo)
             }
             if(raiz.derecho !== null){
                 cadena = cadena + " -> "
-                cadena = cadena + this.recorridoInorden(raiz.derecho)
+                cadena = cadena + this.recorridoPreorden(raiz.derecho)
             }
         }
         return cadena
     }
 
-    recorridoPreOrden(raiz){
+    recorridoInorden(raiz){
         var cadena = ""
         if(raiz !== null){
             if(raiz.izquierdo !== null){
-                cadena += this.recorridoPreOrden(raiz.izquierdo)
+                cadena += this.recorridoInorden(raiz.izquierdo)
                 cadena += " -> "
             }
             cadena += "\""
@@ -61,7 +61,7 @@ class Arbol {
             cadena += "\""
             if(raiz.derecho !== null){
                 cadena += " -> "
-                cadena += this.recorridoPreOrden(raiz.derecho)
+                cadena += this.recorridoInorden(raiz.derecho)
             }
         }
         return cadena
@@ -135,6 +135,7 @@ class Arbol {
         }
         return cadena;
     }
+
     graficarArbol(){
         var cadena = ""
         if(this.raiz !== null){
@@ -143,6 +144,26 @@ class Arbol {
             cadena += "}"
         }
         return cadena
+    }
+
+    /** 
+     * Contenido de graficar los diferentes recorridos del arbol
+     */
+    recorridosArbol(){
+        console.log("Recorrido Pre-Orden")
+        let url = 'https://quickchart.io/graphviz?graph=';
+        let body = "digraph G { graph[label = \"Pre-Orden\" rankdir = LR labelloc = t]" + this.recorridoPreorden(this.raiz) + "}";
+        $("#image1").attr("src", url + body);
+        console.log("Recorrido In-Orden")
+        body = "digraph G { graph[label = \"In-Orden\" rankdir = LR labelloc = t]" + this.recorridoInorden(this.raiz) + "}";
+        $("#image2").attr("src", url + body);
+        console.log("Recorrido Post-Orden")
+        body = "digraph G { graph[label = \"Post-Orden\" rankdir = LR labelloc = t]" + this.recorridoPostOrden(this.raiz) + "}";
+        $("#image3").attr("src", url + body);
+    }
+
+    eliminarTodo(){
+        this.raiz = null;
     }
 
 }
@@ -180,5 +201,23 @@ function refrescarArbol(){
     let url = 'https://quickchart.io/graphviz?graph=';
     let body = arbolBinario.graficarArbol();
     $("#image").attr("src", url + body);
+    document.getElementById("valor").value = "";
+}
+
+/**
+ * Funcion para recorrer
+ */
+function recorrerArbol(){
+    arbolBinario.recorridosArbol();
+}
+
+/**
+ * Funcion para reiniciar el arbol
+ */
+
+function limpiar(){
+    arbolBinario.eliminarTodo();
+    let url = 'https://quickchart.io/graphviz?graph=digraph G { raiz }';
+    $("#image").attr("src", url);
     document.getElementById("valor").value = "";
 }
