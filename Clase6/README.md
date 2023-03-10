@@ -2,7 +2,7 @@
 
 ## __Ejemplo de Matriz Dispersa en JS__  
 
-Para el ejemplo de la clase 6 se realizo una matriz dispersa, a continua se explicara cada parte del ejemplo, para corroborar de forma grafica de la matriz se usara la siguiente pagina [Graphviz Online](https://dreampuf.github.io/GraphvizOnline/), solo copiaremos el codigo que nos devolvera la pagina sencilla en html llamada __clase6.html__   
+Para el ejemplo de la clase 6 se realizo una matriz dispersa, a continua se explicara cada parte del ejemplo, para corroborar de forma grafica la matriz final se usara la siguiente pagina [Graphviz Online](https://dreampuf.github.io/GraphvizOnline/), solo copiaremos el codigo que nos devolvera la pagina sencilla en html llamada __clase6.html__   
 <img src="img/pagina.png" width="600" height="512">
 
 ## __Clase nodoMatriz__
@@ -11,7 +11,7 @@ Esta sera nuestra clase con la cual llevaremos el control de los nodos que posea
 <summary> Descripcion 🧐</summary>
 <br>
 
-Este contara con los atributos __siguiente y anterior__ que seran los punteros para podernos mover a lo largo del eje X, los atributos __abajo y arriba__ que seran los punteros para podernos mover a lo largo del eje Y de la matriz, los atributos __posX y posY__ con ellos podemos llevar control en que posicion de la matriz nos encontramos, seran nuestra forma de llevar control las posicion de los nodos de la matriz, por ultimo el atributo __posicion__ el cual solo almacenara una cadena de texto, en este caso para mostrarnos la posicion que se encuentra el nodo.
+Este contara con los atributos __siguiente y anterior__ que seran los punteros para podernos mover a lo largo del eje X, los atributos __abajo y arriba__ que seran los punteros para podernos mover a lo largo del eje Y de la matriz, los atributos __posX y posY__ con ellos podemos llevar control en que posicion de la matriz nos encontramos, seran nuestra forma de llevar el control de las posiciones de los nodos de la matriz, por ultimo el atributo __posicion__ el cual solo almacenara una cadena de texto, en este caso para mostrarnos la posicion que se encuentra el nodo.
 
 ``` javascript
     class nodoMatriz{
@@ -40,7 +40,7 @@ Esta sera nuestra clase principal con la cual llevaremos control de todas las fu
     }
 ```
 
-### __Funcinoes que se van a crear dentro de la clase Matriz__
+### __Funciones que se van a crear dentro de la clase Matriz__
 
 ---
 
@@ -103,7 +103,8 @@ Esta funcion recibe un parametro que sera la coordenada X, esta funcion tiene co
 Esta funcion recibe dos parametros los cuales son posicion que hace referencencia a la coordenada en Y, y el texto que le enviaremos por default un texto con la siguiente estructura F+posicionY, ejemplo __"F10"__.  
 En esta funcion crearemos el nuevo nodo el cual en la coordenada X tendra por default la constante -1 debido a que vamos a movernos nada mas por la coordenada Y partiendo desde la raiz de la matriz, crearemos 2 pivotes, __piv__ que nos ayudara para almacenar el nodo actual donde estemos al momento de movernos por la coordenada Y, __pivA__ que nos ayudara para almacenar el nodo anterior del piv actual. Esta variable __pivA__ se puede omitir, solo teniendo cuidado con los punteros arriba y abajo. Realizamos un ciclo while para buscar la posicion en Y donde se debe crear e insertar la nueva Fila, para esto estaremos comparando lo siguiente:
 - Si la posicion en Y del nuevo nodo es mayor a la posicion Y del nodo actual, al ser cierto, solo seguimos recorriendo la coordenada Y.  
-<img src="img/Imagen1.png" width="256" height="256">
+<img src="img/Imagen1.png" width="256" height="256">  
+
 - De lo contrario solo hacemos las referencia de los punteros arriba y abajo del nuevo nodo y por ultimo insertamos el nuevo nodo donde corresponde.  
 <img src="img/Imagen2.png" width="256" height="256">
 
@@ -140,7 +141,8 @@ En esta funcion crearemos el nuevo nodo el cual en la coordenada X tendra por de
 Esta funcion recibe dos parametros los cuales son posicion que hace referencencia a la coordenada en X, y el texto que le enviaremos por default un texto con la siguiente estructura C+posicionX, ejemplo __"C10"__.  
 En esta funcion crearemos el nuevo nodo el cual en la coordenada Y tendra por default la constante -1 debido a que vamos a movernos nada mas por la coordenada X partiendo desde la raiz de la matriz, crearemos 2 pivotes, __piv__ que nos ayudara para almacenar el nodo actual donde estemos al momento de movernos por la coordenada X, __pivA__ que nos ayudara para almacenar el nodo anterior del piv actual. Esta variable __pivA__ se puede omitir, solo teniendo cuidado con los punteros anterior y siguiente. Realizamos un ciclo while para buscar la posicion en X donde se debe crear e insertar la nueva columna, para esto estaremos comparando lo siguiente:
 - Si la posicion en X del nuevo nodo es mayor a la posicion X del nodo actual, al ser cierto, solo seguimos recorriendo la coordenada X.  
-<img src="img/Imagen3.png" width="256" height="256">
+<img src="img/Imagen3.png" width="256" height="256">  
+
 - De lo contrario solo hacemos las referencia de los punteros anterior y siguiente del nuevo nodo y por ultimo insertamos el nuevo nodo donde corresponde.  
 <img src="img/Imagen4.png" width="512" height="256">
 
