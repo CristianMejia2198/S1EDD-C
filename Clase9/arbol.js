@@ -14,6 +14,7 @@ class ArbolNArio{
     }
 
     BuscarCarpeta(carpeta_nueva, lista_carpeta){
+        //Si la nueva carpeta se creara en la raiz, se buscara si existe o no
         if(lista_carpeta[1] === "" && this.raiz.primero !== null){
             let aux = this.raiz.primero
             while(aux){
@@ -24,15 +25,15 @@ class ArbolNArio{
             }
             return 2
         }
-
+        //Si la nueva carpeta se creara en la raiz pero no existe ninguna carpeta
         else if (lista_carpeta[1] === "" && this.raiz.primero === null){
             return 5
         }
-
+        //Si la nueva carpeta se creara en algun directorio pero la raiz no posee ninguna carpeta
         else if(lista_carpeta[1] !== "" && this.raiz.primero === null){
             return 3
         }
-        // Documentos /usac /(img, usac)
+        //Buscamos el directorio padre y revisar si en sus hijos existe la carpeta
         else if(lista_carpeta[1] !== "" && this.raiz.primero !== null){
             let aux = this.raiz.primero
             let nivel = lista_carpeta.length
@@ -69,7 +70,7 @@ class ArbolNArio{
 
         }
     }
-
+    //Funcion solo para ordenar la lista de hijos cuando el padre posee varios hijos
     insertarOrdenado(raiz, nuevoNodo){
         let piv = raiz.primero
         if(nuevoNodo.valor < raiz.primero.valor){
@@ -96,23 +97,32 @@ class ArbolNArio{
     }
     // /usac/prueba -> prueba1 /usac/prueba(prueba1)
     insertarHijos(carpeta_nueva, lista_carpeta){
+        /**
+         * creamos el nuevo nodo y aumentamos la cantidad de nodos creados
+         */
         const nuevoNodo = new nodoArbol(carpeta_nueva, this.nodo_creados)
         this.nodo_creados++
+        //Corroboramos si la insercion es en la raiz y si la raiz no tiene ninguna carpeta
         if(lista_carpeta[1] === "" && this.raiz.primero === null){
             this.raiz.primero = nuevoNodo
         }
+        //Corroboramos si la insercion es en la raiz y pero la raiz ya tiene carpetas
         else if(lista_carpeta[1] === "" && this.raiz.primero !== null){
             this.raiz = this.insertarOrdenado(this.raiz, nuevoNodo)
         }
+        //Corroboramos si la insercion es en algun directorio que no es la raiz
         else if(lista_carpeta[1] !== "" && this.raiz.primero !== null){
             let aux = this.raiz.primero
             let nivel = lista_carpeta.length
             let posicion = 1; 
+            //Recorremos hasta llegar a la profundidad maxima donde se quiere insertar la nueva carpeta
             for(var i = 1; i < nivel; i++){
                 if(aux !== null){
                     while(aux){
-                        if(posicion < lista_carpeta.length && lista_carpeta[posicion] === aux.valor){
+                        //Comparamos si las posiciones de la lista de carpetas es igual a la del nodo actual sino seguimos buscando
+                        if(posicion < lista_carpeta.length && lista_carpeta[posicion] === aux.valor){ 
                             posicion++
+                            //Esta comparacion es para asegurarnos que nos quedaremos en el nodo padre
                             if(aux.primero !== null && posicion < lista_carpeta.length){
                                 aux = aux.primero
                             }
@@ -125,7 +135,7 @@ class ArbolNArio{
                     break;
                 }
             }
-            console.log(aux)
+            //Si la carpeta padre ya tiene carpetas se agrega en el primero sino se manda a insertar en el orden correcto
             if(aux.primero === null){
                 aux.primero = nuevoNodo
             }else{
