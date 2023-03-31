@@ -193,7 +193,6 @@ class ArbolNArio{
         cadena += "nodo" + nodo_padre + "[label=\"" + this.raiz.valor  + "\"] "
         cadena += this.valoresSiguietes(this.raiz.primero, nodo, nodo_padre)
         cadena += this.conexionRamas(this.raiz.primero, 0)
-        console.log(cadena)
         return cadena;
     }
 
@@ -233,6 +232,67 @@ class ArbolNArio{
         }
         return cadena
     }
+
+    /** Modificacion 30/03/2023 */
+    BuscarCarpetaV2(lista_carpeta){
+        //Directorio Actual seria la Raiz
+        if(lista_carpeta[1] === "" && this.raiz.primero !== null){
+            return this.raiz
+        }
+        //Directorio Actual seria Raiz pero no contiene elementos
+        else if (lista_carpeta[1] === "" && this.raiz.primero === null){
+            return null
+        }
+        //Actual no es raiz pero tampoco hay elementos en raiz
+        else if(lista_carpeta[1] !== "" && this.raiz.primero === null){
+            return null
+        }
+        //Buscamos el directorio padre y revisar si en sus hijos existe la carpeta
+        else if(lista_carpeta[1] !== "" && this.raiz.primero !== null){
+            let aux = this.raiz.primero
+            let nivel = lista_carpeta.length
+            let posicion = 1; 
+            for(var i = 1; i < nivel; i++){
+                if(aux !== null){
+                    while(aux){
+                        if(posicion < lista_carpeta.length && lista_carpeta[posicion] === aux.valor){
+                            posicion++
+                            if(aux.primero !== null && posicion < lista_carpeta.length){
+                                aux = aux.primero
+                            }
+                            break;
+                        }else{
+                            aux = aux.siguiente
+                        }
+                    }
+                }else{
+                    break;
+                }
+            }
+            if(aux !== null){
+                return aux
+            }else{
+                return null
+            }
+
+        }
+    }
+
+    mostrarCarpetasActuales(ruta){
+        let lista_carpeta = ruta.split('/')
+        let existe_carpeta = this.BuscarCarpetaV2(lista_carpeta)
+        try{
+            if(existe_carpeta !== null){
+                let aux = existe_carpeta.primero
+                while(aux){
+                    console.log(aux.valor)
+                    aux = aux.siguiente
+                }
+            }
+        }catch(error){
+            console.log("Hubo un error")
+        }
+    }
 }
 
 const arbolnario = new ArbolNArio()
@@ -254,4 +314,9 @@ function refrescarArbol(){
     let body = arbolnario.grafica_arbol();
     $("#image").attr("src", url + body);
     document.getElementById("carpeta").value = "";
+}
+
+function mostraCarpetas(){
+    let ruta = document.getElementById("ruta").value
+    arbolnario.mostrarCarpetasActuales(ruta)
 }
