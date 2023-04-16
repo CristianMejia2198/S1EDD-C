@@ -1,0 +1,19 @@
+class nodoAVL{
+    constructor(){
+        .... parametros
+        this.arbol = new arbolnario()
+    }
+}
+
+class nodoarbolnario{
+    constructor(){
+        .... parametros
+        this.matriz = new matriz()
+    }
+}
+
+class nodomatriz{
+    constructor(){
+        ... parametros
+    }
+}
