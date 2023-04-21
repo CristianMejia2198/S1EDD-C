@@ -60,14 +60,23 @@ class grafoDirigido{
         }
     }
 
+    //Reporte modificado para trabajar con carpetas
     grafica(){
-        let cadena = "digraph grafoDirigido{ rankdir=LR; node [shape = circle];"
+        let cadena = "graph grafoDirigido{ rankdir=LR; node [shape=box]; \"/\"; node [shape = ellipse] ; layout=neato; "
         let auxPadre = this.principal
         let auxHijo = this.principal
+        let peso = 0
         while(auxPadre){
             auxHijo = auxPadre.siguiente
+            let profundidad = auxPadre.valor.split('/')
+            let padre = ""
+            if(profundidad.length == 2 && profundidad[1] == ""){ peso = 1}
+            else if(profundidad.length == 2 && profundidad[1] != ""){ peso = 2 }
+            else { peso = profundidad.length }
+            if(auxPadre.valor != "/"){ padre = profundidad[profundidad.length-1] }
+            else { padre = "/" }
             while(auxHijo){
-                cadena += auxPadre.valor + " -> " + auxHijo.valor + " "
+                cadena += "\"" + padre + "\"" + " -- " + "\"" + auxHijo.valor + "\"" + " [label=\"" + peso + "\"] "
                 auxHijo = auxHijo.siguiente
             }
             auxPadre = auxPadre.abajo
