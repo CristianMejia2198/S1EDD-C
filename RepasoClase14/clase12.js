@@ -92,20 +92,28 @@ class TablaHash{
         return nueva_posicion
     }
 
-    busquedaUsuario(carnet){
+    busquedaUsuario(carnet, pass_en){
         let indice = this.calculoIndice(carnet)
         if(indice < this.capacidad){
             try{
                 if(this.tabla[indice] == null){
                     alert("No se encontro el alumno")
                 }else if(this.tabla[indice] != null && this.tabla[indice].carnet == carnet){
-                    alert("Bienvenido " + this.tabla[indice].usuario)
+                    if(this.tabla[indice].password == pass_en){
+                        alert("Bienvenido " + this.tabla[indice].usuario)
+                    }else{
+                        alert("Contraseña incorrecta")
+                    }
                 }else{
                     let contador = 1
                     indice = this.RecalculoIndice(carnet,contador)
                     while(this.tabla[indice] != null){
                         if(this.tabla[indice].carnet == carnet){
-                            alert("Bienvenido " + this.tabla[indice].usuario)
+                            if(this.tabla[indice].password == pass_en){
+                                alert("Bienvenido " + this.tabla[indice].usuario)
+                            }else{
+                                alert("Contraseña incorrecta")
+                            }
                             return
                         }
                         contador++
@@ -190,6 +198,20 @@ class TablaHash{
         return true;
     }
 
+    async sha256(mensaje){
+        let cadenaFinal
+        const enconder =  new TextEncoder();
+        const mensajeCodificado = enconder.encode(mensaje)
+        await crypto.subtle.digest("SHA-256", mensajeCodificado)
+        .then(result => { // 100 -> 6a 
+            const hashArray =  Array.from(new Uint8Array(result))
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('')
+            cadenaFinal = hashHex
+        })
+        .catch(error => console.log(error))
+        return cadenaFinal
+    }
+
 }
 
 const tablaHash = new TablaHash()
@@ -202,16 +224,19 @@ function onChange(event) {
     reader.readAsText(event.target.files[0]);
 }
 
-function onReaderLoad(event){
+async function onReaderLoad(event){
     var obj = JSON.parse(event.target.result);
     for(var i = 0; i < obj.alumnos.length; i++){
-        tablaHash.insertar(obj.alumnos[i].carnet, obj.alumnos[i].nombre, obj.alumnos[i].password)
+        let pass_en = await tablaHash.sha256(obj.alumnos[i].password)
+        tablaHash.insertar(obj.alumnos[i].carnet, obj.alumnos[i].nombre, pass_en)
     }
     console.log(tablaHash.tabla)
     tablaHash.genera_tabla()
 }
 
-function busqueda(){
+async function busqueda(){
     let carnet = document.getElementById("valor").value;
-    tablaHash.busquedaUsuario(carnet)
+    let pass = document.getElementById("passw").value;
+    let pass_en = await tablaHash.sha256(pass)
+    tablaHash.busquedaUsuario(carnet, pass_en)
 }

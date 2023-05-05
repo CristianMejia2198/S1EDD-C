@@ -84,14 +84,36 @@ class grafoDirigido{
         cadena += "}"
         return cadena
     }
+
+    /** 
+     * busquedaCarpetas(ruta){
+     * let aux = this.principal
+     * 
+     * while(aux){
+     *  let ruta = aux.valor
+     *  ruta = ruta.substr(0, ruta.length - 1); // /c1/c1.1
+     *  if(ruta == aux.valor){
+     *      while(aux.siguiente){
+     *      mostrar(aux.siguiente.valor)
+     *      return    
+     *  }
+     *  
+     * }
+     * aux = aux.abajo
+     * }
+     * }
+     * 
+    */
 }
 
 const grafo =  new grafoDirigido()
+
 
 function insertar(){
     let padre = document.getElementById("padre").value 
     let hijos = document.getElementById("hijos").value 
     grafo.insertarValores(padre,hijos)
+    console.log(grafo.principal)
     refrescarGrafo()
 }
 

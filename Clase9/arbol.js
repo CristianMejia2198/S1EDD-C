@@ -293,6 +293,32 @@ class ArbolNArio{
             console.log("Hubo un error")
         }
     }
+    /** Extra 04/05/2023 */
+    grafos(){
+        this.retornarSiguientes(this.raiz.valor, this.raiz.primero)
+    }
+
+    retornarSiguientes(padre, raiz){ 
+        let hijos = ''
+        let carp_padre = padre
+        let aux = raiz
+        while(aux){
+            hijos += aux.valor + ','
+            aux = aux.siguiente
+        }
+        hijos = hijos.substr(0, hijos.length - 1);
+        if(hijos !== ''){
+            console.log("Padre: " + padre + " Hijos: " + hijos)
+            /** grafo.insertarValores(padre, hijos) */
+        }
+        aux = raiz
+        while(aux){
+            carp_padre = padre + aux.valor + "/"
+            //carp_padre = carp_padre.substr(0, carp_padre.length - 1);
+            this.retornarSiguientes(carp_padre , aux.primero)
+            aux = aux.siguiente
+        }
+    }
 }
 
 const arbolnario = new ArbolNArio()
@@ -304,19 +330,16 @@ function agregarVarios(){
     }catch(error){
         alert("Hubo un error al insertar el nodo")
     }
-    document.getElementById("carpeta").value = "";
+    //document.getElementById("carpeta").value = "";
     refrescarArbol();  
-
 }
 
 function refrescarArbol(){
     let url = 'https://quickchart.io/graphviz?graph=';
     let body = arbolnario.grafica_arbol();
     $("#image").attr("src", url + body);
-    document.getElementById("carpeta").value = "";
+    //document.getElementById("carpeta").value = "";
 }
-
 function mostraCarpetas(){
-    let ruta = document.getElementById("ruta").value
-    arbolnario.mostrarCarpetasActuales(ruta)
+    arbolnario.grafos()
 }
